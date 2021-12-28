@@ -48,11 +48,13 @@
 
 (rf/reg-event-fx
   :fetch-dna
-  (fn [_ _]
+  (fn [_ [_ dna]]
     {:http-xhrio {:method          :get
-                  :uri             "/api"
+                  :uri             (str "/api/" dna)
+                  :timeout         1000
                   :response-format (ajax/raw-response-format)
-                  :on-success       [:set-dna]}}))
+                  :on-success       [:set-dna]
+                  :on-failure       [:oops]}}))
 
 (rf/reg-event-db
   :set-dna
@@ -72,8 +74,8 @@
 ;;; Wire this up to the response
 (rf/reg-event-fx
   :common/search-dna
-  (fn [_ _]
-    {:dispatch [:fetch-dna]}))
+  (fn [_ [_ dna]]
+    {:dispatch [:fetch-dna dna]}))
 
 ;; (rf/reg-event-db
 ;;   :common/search-dna

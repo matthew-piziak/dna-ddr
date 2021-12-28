@@ -17,4 +17,4 @@
    ["/docs" {:get (fn [_]
                     (-> (response/ok (-> "docs/docs.md" io/resource slurp))
                        (response/header "Content-Type" "text/plain; charset=utf-8")))}]
-   ["/api" {:get (fn [_] (response/ok "SERVER"))}]])
+   ["/api/:query" {:get (fn [{{:keys [query]} :path-params}] (response/ok (str query)))}]])
