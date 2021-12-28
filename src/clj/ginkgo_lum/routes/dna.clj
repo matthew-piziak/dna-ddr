@@ -9,7 +9,7 @@
 (defn dna-page [request]
   (layout/render request "dna.html"))
 
-(defn home-routes []
+(defn dna-routes []
   [""
    {:middleware [middleware/wrap-csrf
                  middleware/wrap-formats]}
