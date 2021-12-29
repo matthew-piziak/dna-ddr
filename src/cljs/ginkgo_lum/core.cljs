@@ -54,8 +54,7 @@
         dna @(rf/subscribe [:dna])]
     [:section.section>div.container>div.content
      [:h1 "DNA"]
-     [:h2 (str "Last search: " last-search)]
-     [:h2 (str "Response: " dna)]
+     [:h2 dna]
      [:input {:type "text"
               :value @nucleotides
               :on-change #(reset! nucleotides (.-value (.-target %)))
@@ -80,7 +79,7 @@
      ["/about" {:name :about
                 :view #'about-page}]
      ["/dna" {:name :dna
-                :view #'dna-page}]]))
+              :view #'dna-page}]]))
 
 (defn start-router! []
   (rfe/start!

@@ -4,14 +4,17 @@
   :url "http://example.com/FIXME"
 
   :dependencies [[ch.qos.logback/logback-classic "1.2.7"]
+                 [clj-fasta "0.2.3"]
                  [cljs-ajax "0.8.4"]
                  [clojure.java-time "0.3.3"]
                  [com.cognitect/transit-clj "1.0.324"]
                  [com.cognitect/transit-cljs "0.8.269"]
+                 [com.dean/interval-tree "0.1.2"]
                  [cprop "0.1.19"]
                  [day8.re-frame/http-fx "0.2.3"]
                  [expound "0.8.10"]
                  [funcool/struct "1.4.0"]
+                 [instaparse "1.4.10"]
                  [json-html "0.4.7"]
                  [luminus-transit "0.1.3"]
                  [luminus-undertow "0.1.14"]
@@ -40,21 +43,21 @@
                  [thheller/shadow-cljs "2.16.7" :scope "provided"]]
 
   :min-lein-version "2.0.0"
-  
+
   :source-paths ["src/clj" "src/cljs" "src/cljc"]
   :test-paths ["test/clj"]
   :resource-paths ["resources" "target/cljsbuild"]
   :target-path "target/%s/"
   :main ^:skip-aot ginkgo-lum.core
 
-  :plugins [] 
+  :plugins []
   :clean-targets ^{:protect false}
   [:target-path "target/cljsbuild"]
-  
+
 
   :profiles
   {:uberjar {:omit-source true
-             
+
              :prep-tasks ["compile" ["run" "-m" "shadow.cljs.devtools.cli" "release" "app"]]
              :aot :all
              :uberjar-name "ginkgo-lum.jar"
@@ -75,9 +78,9 @@
                                  [ring/ring-mock "0.4.0"]]
                   :plugins      [[com.jakemccrary/lein-test-refresh "0.24.1"]
                                  [jonase/eastwood "0.3.5"]
-                                 [cider/cider-nrepl "0.26.0"]] 
-                  
-                  
+                                 [cider/cider-nrepl "0.26.0"]]
+
+
                   :source-paths ["env/dev/clj"  "env/dev/cljs" "test/cljs" ]
                   :resource-paths ["env/dev/resources"]
                   :repl-options {:init-ns user
@@ -85,9 +88,9 @@
                   :injections [(require 'pjstadig.humane-test-output)
                                (pjstadig.humane-test-output/activate!)]}
    :project/test {:jvm-opts ["-Dconf=test-config.edn" ]
-                  :resource-paths ["env/test/resources"] 
-                  
-                  
+                  :resource-paths ["env/test/resources"]
+
+
                   }
    :profiles/dev {}
    :profiles/test {}})
