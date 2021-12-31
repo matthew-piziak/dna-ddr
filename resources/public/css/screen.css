@@ -2,6 +2,15 @@ html,
 body {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+.content {
+    text-align: center;
+};
+
+img {
+    width: 50px;
+    padding: 10px;
+};
+
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
@@ -31,7 +40,4 @@ body {
   text-rendering: optimizeLegibility;
   /* Support for Firefox. */
   -moz-osx-font-smoothing: grayscale;
-}
-h1, h2, div {
-    text-align: center;
 }

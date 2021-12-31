@@ -113,7 +113,7 @@
 (rf/reg-sub
   :ddr-search
   (fn [db _]
-    (or (:ddr-search db) "DANCE")))
+    (:ddr-search db)))
 
 (rf/reg-sub
   :common/error
@@ -145,6 +145,13 @@
   :nc-g
   (fn [cofx [_ _]]
     (let [ddrs (str "G" (:ddr-search (:db cofx)))]
+      {:db (assoc-in (:db cofx) [:ddr-search] ddrs)
+       :fx [[:dispatch [:fetch-dna ddrs]]]})))
+
+(rf/reg-event-fx
+  :nc-esc
+  (fn [cofx [_ _]]
+    (let [ddrs ""]
       {:db (assoc-in (:db cofx) [:ddr-search] ddrs)
        :fx [[:dispatch [:fetch-dna ddrs]]]})))
 

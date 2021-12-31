@@ -12,7 +12,7 @@
     [ginkgo-lum.events]
     [reitit.core :as reitit]
     [reitit.frontend.easy :as rfe]
-    [clojure.string :as string])
+    [clojure.string :as s])
   (:import goog.History))
 
 (defn nav-link [uri title page]
@@ -57,7 +57,8 @@
    [[[:nc-a] [{:keyCode 37}]]
     [[:nc-t] [{:keyCode 39}]]
     [[:nc-c] [{:keyCode 38}]]
-    [[:nc-g] [{:keyCode 40}]]]
+    [[:nc-g] [{:keyCode 40}]]
+    [[:nc-esc] [{:keyCode 27}]]]
    }])
 
 ;;; input validation
@@ -67,6 +68,7 @@
     [:section.section>div.container>div.content
      [:h1 "DNA DDR"]
      [:h2 "Use arrow keys to move!"]
+     [:h2 "←A ↑C ↓G →T (ESC to clear)"]
      [:h3 ddr-search]
      [:input {:type "text"
               :value @nucleotides
@@ -74,6 +76,8 @@
               }]
      [:button {:on-click #(rf/dispatch [:common/search-dna @nucleotides])} "Search!"]
      [:hr]
+     (if (s/includes? dna "PBCV-1") [:img {:src "/img/NC_000852.jpg"}])
+     (if (s/includes? dna "EhV-86") [:img {:src "/img/NC_007346.jpg"}])
      [:div (map (fn [d] [:div d]) (into [] (re-seq #"\[[^\[\]]*\]" dna)))]
      [:hr]]))
 
