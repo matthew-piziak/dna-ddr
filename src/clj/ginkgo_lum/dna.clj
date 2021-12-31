@@ -37,8 +37,13 @@
   (let [idx (s/index-of nc000852 s)]
     [idx (+ idx (count s))]))
 
+;;; return all results
 (defn resp [s]
-  (interval-map (query-locs s)))
+  (let [results (interval-map (query-locs s))]
+    (if (empty? results) "[DNA NOT FOUND]"
+        (first results))))
+
+(resp "TATTAT")
 
 ;; (interval-map (query-locs "CGCTACCTTT"))
 

@@ -53,8 +53,7 @@
                   :uri             (str "/api/" dna)
                   :timeout         1000
                   :response-format (ajax/raw-response-format)
-                  :on-success       [:set-dna]
-                  :on-failure       [:oops]}}))
+                  :on-success       [:set-dna]}}))
 
 (rf/reg-event-db
   :set-dna

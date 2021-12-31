@@ -54,7 +54,9 @@
         dna @(rf/subscribe [:dna])]
     [:section.section>div.container>div.content
      [:h1 "DNA"]
-     [:h2 dna]
+     [:hr]
+     [:div (map (fn [d] [:div d]) (into [] (re-seq #"\[[^\[\]]*\]" dna)))]
+     [:hr]
      [:input {:type "text"
               :value @nucleotides
               :on-change #(reset! nucleotides (.-value (.-target %)))

@@ -13,4 +13,4 @@
   [""
    {:middleware [middleware/wrap-csrf
                  middleware/wrap-formats]}
-   ["/dna" {:get dna-page}]])
+   ["/" {:get dna-page}]])
