@@ -19,16 +19,24 @@
 (defn as-interval [l]
   [(loc (l :description)) (l :description)])
 
-(def nc000852
-  {:name "PBCV-1"
-   :genome (s/join (u/read-lines "genomes/NC_000852"))
-   :prots (dean/interval-map (map as-interval (let [r (io/reader (io/resource "genomes/NC_000852_prot"))] (fa/fasta-seq r))))})
-(def nc007346
-  {:name "EhV-86"
-   :genome (s/join (u/read-lines "genomes/NC_007346"))
-   :prots (dean/interval-map (map as-interval (let [r (io/reader (io/resource "genomes/NC_007346_prot"))] (fa/fasta-seq r))))})
-
-(def genomes [nc000852 nc007346])
+(defn genome [f name]
+    {:name name
+     :genome (s/join (u/read-lines (str "genomes/" f)))
+     :prots (dean/interval-map
+             (map as-interval
+                  (let [r (io/reader (io/resource (str "genomes/" f "_prot")))]
+                    (fa/fasta-seq r))))})
+(def genomes
+  [(genome "NC_000852" "PBCV-1")
+   (genome "NC_007346" "EhV-86")
+   (genome "NC_008724" "ATCV-1")
+   (genome "NC_009899" "PBCV-AR158")
+   (genome "NC_016072" "Megavirus")
+   (genome "NC_020104" "APMV")
+   (genome "NC_023423" "Pithovirus")
+   (genome "NC_023719" "Phage-G")
+   (genome "NC_027867" "Mollivirus")
+   ])
 
 ;;; remember to handle complements
 ;;; handle overlapping

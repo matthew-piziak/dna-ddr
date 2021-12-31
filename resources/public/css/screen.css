@@ -2,15 +2,13 @@ html,
 body {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-.content {
+h1,h2,h3 {
     text-align: center;
 };
-
 img {
-    width: 50px;
+    max-width: 20%;
     padding: 10px;
 };
-
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
