@@ -76,15 +76,15 @@
               }]
      [:button {:on-click #(rf/dispatch [:common/search-dna @nucleotides])} "Search!"]
      [:hr]
-     (if (s/includes? dna "PBCV-1") [:img {:src "/img/PBCV-1.jpg"}])
-     (if (s/includes? dna "EhV-86") [:img {:src "/img/EhV-86.jpg"}])
-     (if (s/includes? dna "ATCV-1") [:img {:src "/img/ATCV-1.jpg"}])
-     (if (s/includes? dna "PBCV-AR158") [:img {:src "/img/PBCV-AR158.jpg"}])
-     (if (s/includes? dna "Megavirus") [:img {:src "/img/Megavirus.jpg"}])
-     (if (s/includes? dna "APMV") [:img {:src "/img/APMV.jpg"}])
-     (if (s/includes? dna "Pithovirus") [:img {:src "/img/Pithovirus.jpg"}])
-     (if (s/includes? dna "Phage-G") [:img {:src "/img/Phage-G.jpg"}])
-     (if (s/includes? dna "Mollivirus") [:img {:src "/img/Mollivirus.jpg"}])
+     (if (s/includes? dna "PBCV-1") [:img {:src "/img/PBCV-1.jpg" :style {:max-width 120}}])
+     (if (s/includes? dna "EhV-86") [:img {:src "/img/EhV-86.jpg" :style {:max-width 120}}])
+     (if (s/includes? dna "ATCV-1") [:img {:src "/img/ATCV-1.jpg" :style {:max-width 120}}])
+     (if (s/includes? dna "PBCV-AR158") [:img {:src "/img/PBCV-AR158.jpg" :style {:max-width 120}}])
+     (if (s/includes? dna "Megavirus") [:img {:src "/img/Megavirus.jpg" :style {:max-width 120}}])
+     (if (s/includes? dna "APMV") [:img {:src "/img/APMV.jpg" :style {:max-width 120}}])
+     (if (s/includes? dna "Pithovirus") [:img {:src "/img/Pithovirus.jpg" :style {:max-width 120}}])
+     (if (s/includes? dna "Phage-G") [:img {:src "/img/Phage-G.jpg" :style {:max-width 120}}])
+     (if (s/includes? dna "Mollivirus") [:img {:src "/img/Mollivirus.jpg" :style {:max-width 120}}])
      [:div (map (fn [d] [:div d]) (into [] (re-seq #"\[[^\[\]]*\]" dna)))]
      [:hr]]))
 
