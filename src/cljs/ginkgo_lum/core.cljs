@@ -4,6 +4,7 @@
     [reagent.dom :as rdom]
     [reagent.core :as r]
     [re-frame.core :as rf]
+    [re-pressed.core :as rp]
     [goog.events :as events]
     [goog.history.EventType :as HistoryEventType]
     [markdown.core :refer [md->html]]
@@ -24,18 +25,19 @@
   (r/with-let [expanded? (r/atom false)]
               [:nav.navbar.is-info>div.container
                [:div.navbar-brand
-                [:a.navbar-item {:href "/" :style {:font-weight :bold}} "ginkgo-lum"]
+                [:a.navbar-item {:href "/" :style {:font-weight :bold}} "DNA DDR"]
                 [:span.navbar-burger.burger
                  {:data-target :nav-menu
                   :on-click #(swap! expanded? not)
                   :class (when @expanded? :is-active)}
                  [:span][:span][:span]]]
-               [:div#nav-menu.navbar-menu
-                {:class (when @expanded? :is-active)}
-                [:div.navbar-start
-                 [nav-link "#/" "Home" :home]
-                 [nav-link "#/about" "About" :about]
-                 [nav-link "#/dna" "DNA" :dna]]]]))
+               ;; [:div#nav-menu.navbar-menu
+               ;;  {:class (when @expanded? :is-active)}
+               ;;  [:div.navbar-start
+               ;;   [nav-link "#/" "Home" :home]
+               ;;   [nav-link "#/about" "About" :about]
+               ;;   [nav-link "#/dna" "DNA" :dna]]]
+               ]))
 
 (defn about-page []
   [:section.section>div.container>div.content
@@ -48,27 +50,37 @@
 
 (def nucleotides (r/atom ""))
 
+(defonce key-rules (rf/dispatch-sync [::rp/add-keyboard-event-listener "keydown"]))
+(rf/dispatch
+ [::rp/set-keydown-rules
+  {:event-keys
+   [[[:nc-a] [{:keyCode 37}]]
+    [[:nc-t] [{:keyCode 39}]]
+    [[:nc-c] [{:keyCode 38}]]
+    [[:nc-g] [{:keyCode 40}]]]
+   }])
+
 ;;; input validation
 (defn dna-page []
-  (let [last-search @(rf/subscribe [:last-search])
-        dna @(rf/subscribe [:dna])]
+  (let [dna @(rf/subscribe [:dna])
+        ddr-search @(rf/subscribe [:ddr-search])]
     [:section.section>div.container>div.content
-     [:h1 "DNA"]
-     [:hr]
-     [:div (map (fn [d] [:div d]) (into [] (re-seq #"\[[^\[\]]*\]" dna)))]
-     [:hr]
+     [:h1 "DNA DDR"]
+     [:h2 "Use arrow keys to move!"]
+     [:h3 ddr-search]
      [:input {:type "text"
               :value @nucleotides
               :on-change #(reset! nucleotides (.-value (.-target %)))
               }]
-     ;; Wire this up to server response
-     [:button  {:on-click #(rf/dispatch [:common/search-dna @nucleotides])} "Click me!"]]))
+     [:button {:on-click #(rf/dispatch [:common/search-dna @nucleotides])} "Search!"]
+     [:hr]
+     [:div (map (fn [d] [:div d]) (into [] (re-seq #"\[[^\[\]]*\]" dna)))]
+     [:hr]]))
 
 (defn page []
-  (if-let [page @(rf/subscribe [:common/page])]
-    [:div
-     [navbar]
-     [page]]))
+  [:div
+   [navbar]
+   [dna-page]])
 
 (defn navigate! [match _]
   (rf/dispatch [:common/navigate match]))

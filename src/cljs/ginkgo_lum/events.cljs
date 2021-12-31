@@ -106,16 +106,59 @@
     (:docs db)))
 
 (rf/reg-sub
-  :last-search
-  (fn [db _]
-    (or (:last-search db) "NOTHING")))
-
-(rf/reg-sub
   :dna
   (fn [db _]
     (or (:dna db) "NO RESPONSE")))
 
 (rf/reg-sub
+  :ddr-search
+  (fn [db _]
+    (or (:ddr-search db) "DANCE")))
+
+(rf/reg-sub
   :common/error
   (fn [db _]
     (:common/error db)))
+
+(rf/reg-event-fx
+  :nc-a
+  (fn [cofx [_ _]]
+    (let [ddrs (str "A" (:ddr-search (:db cofx)))]
+      {:db (assoc-in (:db cofx) [:ddr-search] ddrs)
+       :fx [[:dispatch [:fetch-dna ddrs]]]})))
+
+(rf/reg-event-fx
+  :nc-t
+  (fn [cofx [_ _]]
+    (let [ddrs (str "T" (:ddr-search (:db cofx)))]
+      {:db (assoc-in (:db cofx) [:ddr-search] ddrs)
+       :fx [[:dispatch [:fetch-dna ddrs]]]})))
+
+(rf/reg-event-fx
+  :nc-c
+  (fn [cofx [_ _]]
+    (let [ddrs (str "C" (:ddr-search (:db cofx)))]
+      {:db (assoc-in (:db cofx) [:ddr-search] ddrs)
+       :fx [[:dispatch [:fetch-dna ddrs]]]})))
+
+(rf/reg-event-fx
+  :nc-g
+  (fn [cofx [_ _]]
+    (let [ddrs (str "G" (:ddr-search (:db cofx)))]
+      {:db (assoc-in (:db cofx) [:ddr-search] ddrs)
+       :fx [[:dispatch [:fetch-dna ddrs]]]})))
+
+;; (rf/reg-event-fx
+;;   :nc-t
+;;   (fn [cofx [_ dna]]
+;;     (update-in db [:ddr-search] (fn [s] (str "T" s)))))
+
+;; (rf/reg-event-fx
+;;   :nc-c
+;;   (fn [cofx [_ dna]]
+;;     (update-in db [:ddr-search] (fn [s] (str "C" s)))))
+
+;; (rf/reg-event-fx
+;;   :nc-g
+;;   (fn [cofx [_ dna]]
+;;     (update-in db [:ddr-search] (fn [s] (str "G" s)))))

@@ -32,4 +32,6 @@ body {
   /* Support for Firefox. */
   -moz-osx-font-smoothing: grayscale;
 }
-
+h1, h2, div {
+    text-align: center;
+}
