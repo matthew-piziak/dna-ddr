@@ -153,7 +153,7 @@
   (fn [cofx [_ _]]
     (let [ddrs ""]
       {:db (assoc-in (:db cofx) [:ddr-search] ddrs)
-       :fx [[:dispatch [:fetch-dna ddrs]]]})))
+       :fx [[:dispatch [:fetch-dna "X"]]]})))
 
 ;; (rf/reg-event-fx
 ;;   :nc-t
