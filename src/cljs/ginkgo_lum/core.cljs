@@ -70,11 +70,12 @@
      [:h2 "Use arrow keys to move!"]
      [:h2 "←A ↑C ↓G →T (ESC to clear)"]
      [:h3 ddr-search]
-     [:input {:type "text"
-              :value @nucleotides
-              :on-change #(reset! nucleotides (.-value (.-target %)))
-              }]
-     [:button {:on-click #(rf/dispatch [:common/search-dna @nucleotides])} "Search!"]
+     [:div
+      [:input {:type "text"
+               :value @nucleotides
+               :on-change #(reset! nucleotides (.-value (.-target %)))
+               }]
+      [:button {:on-click #(rf/dispatch [:common/search-dna @nucleotides])} "Search Manually"]]
      [:hr]
      (if (s/includes? dna "PBCV-1") [:img {:src "/img/PBCV-1.jpg" :style {:max-width 120}}])
      (if (s/includes? dna "EhV-86") [:img {:src "/img/EhV-86.jpg" :style {:max-width 120}}])
