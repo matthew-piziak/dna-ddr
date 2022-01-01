@@ -3,7 +3,15 @@
     [re-frame.core :as rf]
     [ajax.core :as ajax]
     [reitit.frontend.easy :as rfe]
-    [reitit.frontend.controllers :as rfc]))
+    [reitit.frontend.controllers :as rfc]
+    [akiroz.re-frame.storage :refer [reg-co-fx!]]))
+
+;;; app storage
+
+;; both :fx and :cofx keys are optional, they will not be registered if unspecified.
+(reg-co-fx! :my-app
+            {:fx :store
+             :cofx :store})
 
 ;;dispatchers
 
@@ -47,13 +55,15 @@
                   :on-success       [:set-docs]}}))
 
 (rf/reg-event-fx
-  :fetch-dna
-  (fn [_ [_ dna]]
-    {:http-xhrio {:method          :get
-                  :uri             (str "/api/" dna)
-                  :timeout         1000
-                  :response-format (ajax/raw-response-format)
-                  :on-success       [:set-dna]}}))
+ :fetch-dna
+ [(rf/inject-cofx :store)]
+ (fn [{:keys [store]} [_ dna]]
+   {:store (assoc store :dna dna)
+    :http-xhrio {:method          :get
+                 :uri             (str "/api/" dna)
+                 :timeout         1000
+                 :response-format (ajax/raw-response-format)
+                 :on-success       [:set-dna]}}))
 
 (rf/reg-event-db
   :set-dna
@@ -67,8 +77,10 @@
 
 (rf/reg-event-fx
   :page/init-home
-  (fn [_ _]
-    {:dispatch [:fetch-docs]}))
+  [(rf/inject-cofx :store)]
+  (fn [{:keys [store]} _]
+    (print (:dna store))
+    {:dispatch [:fetch-dna (:dna store)]}))
 
 ;;; Wire this up to the response
 (rf/reg-event-fx

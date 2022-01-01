@@ -3,7 +3,8 @@
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
 
-  :dependencies [[ch.qos.logback/logback-classic "1.2.7"]
+  :dependencies [[akiroz.re-frame/storage "0.1.4"]
+                 [ch.qos.logback/logback-classic "1.2.7"]
                  [clj-fasta "0.2.3"]
                  [cljs-ajax "0.8.4"]
                  [clojure.java-time "0.3.3"]
