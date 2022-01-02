@@ -4,7 +4,8 @@
     [ajax.core :as ajax]
     [reitit.frontend.easy :as rfe]
     [reitit.frontend.controllers :as rfc]
-    [akiroz.re-frame.storage :refer [reg-co-fx!]]))
+    [akiroz.re-frame.storage :refer [reg-co-fx!]]
+    [ginkgo-lum.codons :as codons]))
 
 ;;; app storage
 
@@ -17,14 +18,6 @@
 
 (rf/reg-event-db
   :common/navigate
-  (fn [db [_ match]]
-    (let [old-match (:common/route db)
-          new-match (assoc match :controllers
-                                 (rfc/apply-controllers (:controllers old-match) match))]
-      (assoc db :common/route new-match))))
-
-(rf/reg-event-db
-  :common/search-dna
   (fn [db [_ match]]
     (let [old-match (:common/route db)
           new-match (assoc match :controllers
@@ -79,14 +72,14 @@
   :page/init-home
   [(rf/inject-cofx :store)]
   (fn [{:keys [store]} _]
-    (print (:dna store))
     {:dispatch [:fetch-dna (:dna store)]}))
 
 ;;; Wire this up to the response
 (rf/reg-event-fx
   :common/search-dna
-  (fn [_ [_ dna]]
-    {:dispatch [:fetch-dna dna]}))
+  (fn [cofx [_ dna]]
+    {:db (assoc-in (:db cofx) [:ddr-search] dna)
+     :dispatch [:fetch-dna dna]}))
 
 ;; (rf/reg-event-db
 ;;   :common/search-dna
@@ -135,28 +128,28 @@
 (rf/reg-event-fx
   :nc-a
   (fn [cofx [_ _]]
-    (let [ddrs (str "A" (:ddr-search (:db cofx)))]
+    (let [ddrs (str (:ddr-search (:db cofx)) "A")]
       {:db (assoc-in (:db cofx) [:ddr-search] ddrs)
        :fx [[:dispatch [:fetch-dna ddrs]]]})))
 
 (rf/reg-event-fx
   :nc-t
   (fn [cofx [_ _]]
-    (let [ddrs (str "T" (:ddr-search (:db cofx)))]
+    (let [ddrs (str (:ddr-search (:db cofx)) "T")]
       {:db (assoc-in (:db cofx) [:ddr-search] ddrs)
        :fx [[:dispatch [:fetch-dna ddrs]]]})))
 
 (rf/reg-event-fx
   :nc-c
   (fn [cofx [_ _]]
-    (let [ddrs (str "C" (:ddr-search (:db cofx)))]
+    (let [ddrs (str (:ddr-search (:db cofx)) "C")]
       {:db (assoc-in (:db cofx) [:ddr-search] ddrs)
        :fx [[:dispatch [:fetch-dna ddrs]]]})))
 
 (rf/reg-event-fx
   :nc-g
   (fn [cofx [_ _]]
-    (let [ddrs (str "G" (:ddr-search (:db cofx)))]
+    (let [ddrs (str (:ddr-search (:db cofx)) "G")]
       {:db (assoc-in (:db cofx) [:ddr-search] ddrs)
        :fx [[:dispatch [:fetch-dna ddrs]]]})))
 
@@ -167,17 +160,11 @@
       {:db (assoc-in (:db cofx) [:ddr-search] ddrs)
        :fx [[:dispatch [:fetch-dna "X"]]]})))
 
-;; (rf/reg-event-fx
-;;   :nc-t
-;;   (fn [cofx [_ dna]]
-;;     (update-in db [:ddr-search] (fn [s] (str "T" s)))))
-
-;; (rf/reg-event-fx
-;;   :nc-c
-;;   (fn [cofx [_ dna]]
-;;     (update-in db [:ddr-search] (fn [s] (str "C" s)))))
-
-;; (rf/reg-event-fx
-;;   :nc-g
-;;   (fn [cofx [_ dna]]
-;;     (update-in db [:ddr-search] (fn [s] (str "G" s)))))
+(rf/reg-sub
+  :amino-acid
+  (fn [_]
+    [(rf/subscribe [:ddr-search])])
+  (fn [[dna] _]
+    (if (< (count dna) 3) ""
+        (let [triplet (last (partition 3 dna))]
+          (str (codons/codons (apply str triplet)) "!")))))

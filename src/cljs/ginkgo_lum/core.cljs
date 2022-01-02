@@ -64,12 +64,15 @@
 ;;; input validation
 (defn dna-page []
   (let [dna @(rf/subscribe [:dna])
-        ddr-search @(rf/subscribe [:ddr-search])]
+        ddr-search @(rf/subscribe [:ddr-search])
+        amino-acid @(rf/subscribe [:amino-acid])
+        ]
     [:section.section>div.container>div.content
      [:h1 "DNA DDR"]
      [:h2 "Use arrow keys to move!"]
      [:h2 "←A ↑C ↓G →T (ESC to clear)"]
      [:h3 ddr-search]
+     [:h3 amino-acid]
      [:div
       [:input {:type "text"
                :value @nucleotides
@@ -77,15 +80,16 @@
                }]
       [:button {:on-click #(rf/dispatch [:common/search-dna @nucleotides])} "Search Manually"]]
      [:hr]
-     (if (s/includes? dna "PBCV-1") [:img {:src "/img/PBCV-1.jpg" :style {:max-width 120}}])
-     (if (s/includes? dna "EhV-86") [:img {:src "/img/EhV-86.jpg" :style {:max-width 120}}])
-     (if (s/includes? dna "ATCV-1") [:img {:src "/img/ATCV-1.jpg" :style {:max-width 120}}])
-     (if (s/includes? dna "PBCV-AR158") [:img {:src "/img/PBCV-AR158.jpg" :style {:max-width 120}}])
-     (if (s/includes? dna "Megavirus") [:img {:src "/img/Megavirus.jpg" :style {:max-width 120}}])
-     (if (s/includes? dna "APMV") [:img {:src "/img/APMV.jpg" :style {:max-width 120}}])
-     (if (s/includes? dna "Pithovirus") [:img {:src "/img/Pithovirus.jpg" :style {:max-width 120}}])
-     (if (s/includes? dna "Phage-G") [:img {:src "/img/Phage-G.jpg" :style {:max-width 120}}])
-     (if (s/includes? dna "Mollivirus") [:img {:src "/img/Mollivirus.jpg" :style {:max-width 120}}])
+     (if (s/includes? dna "PBCV-1") [:img {:src "/img/PBCV-1.jpg" :style {:max-width 100}}])
+     (if (s/includes? dna "EhV-86") [:img {:src "/img/EhV-86.jpg" :style {:max-width 100}}])
+     (if (s/includes? dna "ATCV-1") [:img {:src "/img/ATCV-1.jpg" :style {:max-width 100}}])
+     (if (s/includes? dna "PBCV-AR158") [:img {:src "/img/PBCV-AR158.jpg" :style {:max-width 100}}])
+     (if (s/includes? dna "Megavirus") [:img {:src "/img/Megavirus.jpg" :style {:max-width 100}}])
+     (if (s/includes? dna "APMV") [:img {:src "/img/APMV.jpg" :style {:max-width 100}}])
+     (if (s/includes? dna "Pithovirus") [:img {:src "/img/Pithovirus.jpg" :style {:max-width 100}}])
+     (if (s/includes? dna "Phage-G") [:img {:src "/img/Phage-G.jpg" :style {:max-width 100}}])
+     (if (s/includes? dna "Mollivirus") [:img {:src "/img/Mollivirus.jpg" :style {:max-width 100}}])
+     (if (s/includes? dna "BV-PW1") [:img {:src "/img/BV-PW1.jpg" :style {:max-width 100}}])
      [:div (map (fn [d] [:div d]) (into [] (re-seq #"\[[^\[\]]*\]" dna)))]
      [:hr]]))
 

@@ -31,12 +31,12 @@
    (genome "NC_007346" "EhV-86")
    (genome "NC_008724" "ATCV-1")
    (genome "NC_009899" "PBCV-AR158")
-   (genome "NC_016072" "Megavirus")
+   (genome "NC_016072" "Megavirus") ; NCBI redirect from NC_023740
    (genome "NC_020104" "APMV")
    (genome "NC_023423" "Pithovirus")
    (genome "NC_023719" "Phage-G")
    (genome "NC_027867" "Mollivirus")
-   ])
+   (genome "NC_014637" "BV-PW1")])
 
 ;;; remember to handle complements
 ;;; handle overlapping
