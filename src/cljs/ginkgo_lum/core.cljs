@@ -54,11 +54,21 @@
 (rf/dispatch
  [::rp/set-keydown-rules
   {:event-keys
-   [[[:nc-a] [{:keyCode 37}]]
+   [
+    ;; Use arrow keys to move
+    [[:nc-a] [{:keyCode 37}]]
     [[:nc-t] [{:keyCode 39}]]
     [[:nc-c] [{:keyCode 38}]]
     [[:nc-g] [{:keyCode 40}]]
-    [[:nc-esc] [{:keyCode 27}]]]
+
+    ;; ESC to clear
+    [[:nc-esc] [{:keyCode 27}]]
+
+    ;; In case of confusion, also permit typing ACTG
+    [[:nc-a] [{:keyCode 65}]]
+    [[:nc-t] [{:keyCode 84}]]
+    [[:nc-c] [{:keyCode 67}]]
+    [[:nc-g] [{:keyCode 71}]]]
    }])
 
 ;;; input validation
