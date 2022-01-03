@@ -54,9 +54,3 @@
   (let [results (query-locs s)]
     (if (empty? results) "[DNA NOT FOUND]"
         results)))
-
-(resp "TATTAT")
-
-;; (interval-map (query-locs "CGCTACCTTT"))
-
-;; (time (interval-map (query-locs "ATCAAATATTAACGGAAACGTAAGAAGTTCTACCGCAAATGTTCAGGGTAGATTATCAGCAACAACCCCG")))

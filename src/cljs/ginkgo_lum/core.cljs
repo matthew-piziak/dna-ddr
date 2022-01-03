@@ -30,18 +30,7 @@
                  {:data-target :nav-menu
                   :on-click #(swap! expanded? not)
                   :class (when @expanded? :is-active)}
-                 [:span][:span][:span]]]
-               ;; [:div#nav-menu.navbar-menu
-               ;;  {:class (when @expanded? :is-active)}
-               ;;  [:div.navbar-start
-               ;;   [nav-link "#/" "Home" :home]
-               ;;   [nav-link "#/about" "About" :about]
-               ;;   [nav-link "#/dna" "DNA" :dna]]]
-               ]))
-
-(defn about-page []
-  [:section.section>div.container>div.content
-   [:img {:src "/img/warning_clojure.png"}]])
+                 [:span][:span][:span]]]]))
 
 (defn home-page []
   [:section.section>div.container>div.content
@@ -116,8 +105,6 @@
     [["/" {:name        :home
            :view        #'home-page
            :controllers [{:start (fn [_] (rf/dispatch [:page/init-home]))}]}]
-     ["/about" {:name :about
-                :view #'about-page}]
      ["/dna" {:name :dna
               :view #'dna-page}]]))
 

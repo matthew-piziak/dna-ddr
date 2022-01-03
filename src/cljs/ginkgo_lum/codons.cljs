@@ -1,6 +1,7 @@
 (ns ginkgo-lum.codons)
 
 (def codons
+  ;; codon map so that we can shout out the names of amino acids
   {
   "AAA" "Lysine"
   "AAC" "Asparagine"

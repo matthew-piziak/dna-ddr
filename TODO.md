@@ -5,3 +5,4 @@
 * [ ] property tests
   * [ ] pick out a random subsequence from a protein, and see if the system returns the correct protein again
 * [ ] Highlight organism names
+* [ ] Some functions can be DRYed up

@@ -7,14 +7,14 @@
     [akiroz.re-frame.storage :refer [reg-co-fx!]]
     [ginkgo-lum.codons :as codons]))
 
-;;; app storage
+;;; support HTML5 Web Storage
 
 ;; both :fx and :cofx keys are optional, they will not be registered if unspecified.
 (reg-co-fx! :my-app
             {:fx :store
              :cofx :store})
 
-;;dispatchers
+;; Event dispatchers
 
 (rf/reg-event-db
   :common/navigate
@@ -33,19 +33,6 @@
   :common/navigate!
   (fn [_ [_ url-key params query]]
     {:common/navigate-fx! [url-key params query]}))
-
-(rf/reg-event-db
-  :set-docs
-  (fn [db [_ docs]]
-    (assoc db :docs docs)))
-
-(rf/reg-event-fx
-  :fetch-docs
-  (fn [_ _]
-    {:http-xhrio {:method          :get
-                  :uri             "/docs"
-                  :response-format (ajax/raw-response-format)
-                  :on-success       [:set-docs]}}))
 
 (rf/reg-event-fx
  :fetch-dna
@@ -74,19 +61,13 @@
   (fn [{:keys [store]} _]
     {:dispatch [:fetch-dna (:dna store)]}))
 
-;;; Wire this up to the response
 (rf/reg-event-fx
   :common/search-dna
   (fn [cofx [_ dna]]
     {:db (assoc-in (:db cofx) [:ddr-search] dna)
      :dispatch [:fetch-dna dna]}))
 
-;; (rf/reg-event-db
-;;   :common/search-dna
-;;   (fn [db [_ dna]]
-;;     (assoc db :last-search dna)))
-
-;;subscriptions
+;; Event subscriptions
 
 (rf/reg-sub
   :common/route
