@@ -3,7 +3,7 @@
 Welcome to DNA DDR! Use the **arrow keys** to input nucleotides and results will be updated live.
 
 You should see something like this:
-<screenshot>
+![screenshot](screenshots/screenshot.png?raw=true "DNA DDR")
 
 ## Live Site
 
