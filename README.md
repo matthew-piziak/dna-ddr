@@ -1,21 +1,17 @@
-# ginkgo-lum
+# DNA DDR
 
-generated using Luminus version "4.30"
+Welcome to DNA DDR! Use the **arrow keys** to input nucleotides and results will be updated live.
 
-FIXME
+You should see something like this:
+<screenshot>
 
-## Prerequisites
+## Live Site
 
-You will need [Leiningen][1] 2.0 or above installed.
+This site is hosted at <https://sleepy-reef-84623.herokuapp.com/>.
 
-[1]: https://github.com/technomancy/leiningen
+Note that to save resources this kind of Heroku instance is not kept hot. If it does not immediately load, wait a few
+seconds. Subsequent loads will be instantaneous.
 
-## Running
+## Documentation
 
-To start a web server for the application, run:
-
-    lein run 
-
-## License
-
-Copyright © 2021 FIXME
+See <INSTALL> for installation instructions, <ARCHITECTURE> for design notes, and <TODO> for next steps.
