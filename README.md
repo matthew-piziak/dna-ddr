@@ -16,7 +16,8 @@ This site is hosted at <https://sleepy-reef-84623.herokuapp.com/>.
 
 ## Minor Notes
 
-If you'd rather use a form input, use the tiny input with the button labeled "Search Manually".
+If you'd rather use a form input, use the tiny input with the button labeled "Search Manually". Click out of the input
+to start getting live feedback again.
 
 Type three nucleotides and get an amino-acid shout-out!
 
