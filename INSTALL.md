@@ -14,4 +14,4 @@ To start a web server for the application, run:
 
 ## Alternatives
 
-A Dockerfile is also available if you prefer.
+A Dockerfile is also available if you prefer. To build it requires `lein uberjar` be run first.
