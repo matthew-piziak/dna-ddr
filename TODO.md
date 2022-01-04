@@ -38,3 +38,7 @@ To better separate views, subscriptions, and styles.
 
 Right now they return raw responses. The server should do more work here to prepare them for the client. It can be
 encoded using Extensible Data Notation.
+
+# Disable arrow-key scrolling
+
+The down-key scrolls down, as well as inputting G, which is confusing.
