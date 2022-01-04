@@ -135,6 +135,13 @@
        :fx [[:dispatch [:fetch-dna ddrs]]]})))
 
 (rf/reg-event-fx
+  :nc-del
+  (fn [cofx [_ _]]
+    (let [ddrs (apply str (butlast (:ddr-search (:db cofx))))]
+      {:db (assoc-in (:db cofx) [:ddr-search] ddrs)
+       :fx [[:dispatch [:fetch-dna ddrs]]]})))
+
+(rf/reg-event-fx
   :nc-esc
   (fn [cofx [_ _]]
     (let [ddrs ""]

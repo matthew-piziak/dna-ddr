@@ -42,12 +42,13 @@
 ;;; handle overlapping
 ;;; will need tests
 
-(defn query-locs [s]
-  (remove nil?
-   (for [g genomes]
-     (if (s/includes? (g :genome) s)
-       (let [idx (s/index-of (g :genome) s)]
-         (str "[" (g :name) "] " (apply str ((g :prots) [idx (+ idx (count s))]))))))))
+(defn query-locs [s-in]
+  (let [s (s/upper-case s-in)]
+    (remove nil?
+            (for [g genomes]
+              (if (s/includes? (g :genome) s)
+                (let [idx (s/index-of (g :genome) s)]
+                  (str "[" (g :name) "] " (apply str ((g :prots) [idx (+ idx (count s))])))))))))
 
 ;;; return all results
 (defn resp [s]

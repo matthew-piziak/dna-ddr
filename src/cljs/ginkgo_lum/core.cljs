@@ -50,6 +50,9 @@
     [[:nc-c] [{:keyCode 38}]]
     [[:nc-g] [{:keyCode 40}]]
 
+    ;; DEL to delete
+    [[:nc-del] [{:keyCode 8}]]
+
     ;; ESC to clear
     [[:nc-esc] [{:keyCode 27}]]
 
@@ -75,7 +78,7 @@
      [:div
       [:input {:type "text"
                :value @nucleotides
-               :on-change #(reset! nucleotides (.-value (.-target %)))
+               :on-change #(reset! nucleotides (s/upper-case (.-value (.-target %))))
                }]
       [:button {:on-click #(rf/dispatch [:common/search-dna @nucleotides])} "Search Manually"]]
      [:hr]
