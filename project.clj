@@ -1,7 +1,7 @@
-(defproject ginkgo-lum "0.1.0-SNAPSHOT"
+(defproject ginkgo-lum "0.1.0"
 
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "A genome-search toy application"
+  :url "https://github.com/matthew-piziak/dna-ddr"
 
   :dependencies [[akiroz.re-frame/storage "0.1.4"]
                  [ch.qos.logback/logback-classic "1.2.7"]
