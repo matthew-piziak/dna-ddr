@@ -22,10 +22,10 @@ Type three nucleotides and get an amino-acid shout-out!
 
 ## Documentation
 
-Please see <ARCHITECTURE> for design and architecture notes!
+Please see [ARCHITECTURE.md](ARCHITECTURE.md) for design and architecture notes!
 
-<INSTALL> contains installation instructions.
+[INSTALL.md](INSTALL.md) contains installation instructions.
 
-<TODO> lists potential improvements.
+[TODO.md](TODO.md) lists potential improvements.
 
 Thanks for stopping by!
