@@ -14,4 +14,4 @@ To start a web server for the application, run:
 
 ## Alternatives
 
-A Dockerfile is also available.
+A Dockerfile is also available if you prefer.

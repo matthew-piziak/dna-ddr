@@ -40,11 +40,11 @@ In the code, this fits naturally into `re-frame`'s coeffects model. Storage is m
 The reactive architecture of `re-frame` means that updates happen without blocking user input. Since the entire dataset
 is in memory and the operations are fast, any delays should not be perceptible at the current scale.
 
-To support more expensive operations or greater scale, a simple job queue like could be included.
+To support more expensive operations or greater scale, a simple job queue could be included.
 
 I've taken some creative liberty by making this app give live feedback, and a "query history" doesn't fit well into that
-model, but for reference, such a feature could be built into web storage simply by creating a `re-frame` subscription
-that accumulates all queries and results.
+model, but for reference, such a feature could be built into web storage by creating a `re-frame` subscription that
+accumulates all queries and results.
 
 ### `re-frame` model
 
@@ -60,11 +60,12 @@ The requirements only ask for a single genome result, but I return _all_ genomes
 
 ## Why Clojure and Luminus?
 
-Of React-derived frameworks I happened to have used `re-frame` most recently. It has a nice
-functional-reactive-programming model.
+I happened to have used `re-frame` most recently and it's React-based. It has a nice functional-reactive-programming
+model that is natural for this exercise.
 
 ## Flexibility
 
-This architecture to be flexible enough to move in a number of different directions with speed. Client debugging is
-easy, either client or server could be swapped out entirely (for example, replacing the server with a biopython
-backend), and more infrastructure (database, data warehouse, job queue) is easy to integrate.
+This architecture is flexible enough to move in a number of different directions with speed. There are doubtless errors
+or deficiencies, but they are correctable. Client debugging is easy, either client or server could be swapped out
+entirely (for example, replacing the server with a biopython backend), and more infrastructure (database, data
+warehouse, job queue) is easy to integrate.
