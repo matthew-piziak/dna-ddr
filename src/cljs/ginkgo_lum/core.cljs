@@ -71,8 +71,11 @@
         ]
     [:section.section>div.container>div.content
      [:h1 "DNA DDR"]
-     [:h2 "Use arrow keys to move!"]
-     [:h2 "←A ↑C ↓G →T (ESC to clear)"]
+     [:h2 "Use arrow keys to move! (ESC to clear)"]
+     [:img {:src "/img/dpad.png" :style {:max-width 250 :margin-left "auto"
+                                         :margin-right "auto"
+                                         :width "50%"
+                                         :display "block"}}]
      [:h3 ddr-search]
      [:h3 amino-acid]
      [:div
@@ -92,7 +95,8 @@
      (if (s/includes? dna "Phage-G") [:img {:src "/img/Phage-G.jpg" :style {:max-width 100}}])
      (if (s/includes? dna "Mollivirus") [:img {:src "/img/Mollivirus.jpg" :style {:max-width 100}}])
      (if (s/includes? dna "BV-PW1") [:img {:src "/img/BV-PW1.jpg" :style {:max-width 100}}])
-     [:div (map (fn [d] [:div d]) (into [] (re-seq #"\[[^\[\]]*\]" dna)))]
+     [:hr]
+     [:div {:style {:padding-left 20 :font-size "18px"}} (map (fn [d] [:div d]) (into [] (re-seq #"\[[^\[\]]*\]" dna)))]
      [:hr]]))
 
 (defn page []

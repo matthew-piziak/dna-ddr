@@ -32,4 +32,9 @@ within reason.
 
 # Client code should be better modularized
 
-To better separate views and subscriptions.
+To better separate views, subscriptions, and styles.
+
+# Structured Responses
+
+Right now they return raw responses. The server should do more work here to prepare them for the client. It can be
+encoded using Extensible Data Notation.
